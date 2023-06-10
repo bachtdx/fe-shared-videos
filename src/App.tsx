@@ -11,7 +11,7 @@ interface User {
   email: string;
 }
 function App() {
-  const [user, setUser] = useState<User>({token: "", email: ""});
+  const [user, setUser] = useState<User>({token: "a", email: "tdxbach@gmail.com"});
   return (
     <Layout>
     <Header user={user} />

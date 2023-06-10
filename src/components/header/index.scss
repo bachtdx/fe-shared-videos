@@ -1,7 +1,7 @@
 #root .ant-layout {
-    background: #fff !important;
-    padding-left: 60px;
-    padding-right: 30px;
+  background: #fff !important;
+  padding-left: 60px;
+  padding-right: 30px;
 }
 
 .shared-video-header {
@@ -16,47 +16,67 @@
 }
 
 .shared-vide-row {
-    height: inherit !important;
+  height: inherit !important;
 }
 
 .shared-video-row div {
-    height: inherit !important;
+  height: inherit !important;
 }
 
 .shared-video-input {
-    width: 200px;
-    height: 40px;
-    margin-top: 5px;
-    margin-right: 10px;
+  width: 200px;
+  height: 40px;
+  margin-top: 5px;
+  margin-right: 10px;
 }
 
 .shared-video-button-login {
-    height: 40px;
-    margin-top: 5px;
+  height: 40px;
+  margin-top: 5px;
 }
 
 .shared-video-button-logout {
-    height: 40px;
-    margin-top: 5px;
-    margin-right: 30px;
+  height: 40px;
+  margin-top: 5px;
+  margin-right: 30px;
 }
 
 .shared-video-button-share-movie {
-    height: 40px;
-    margin-top: 5px;
-    margin-right: 10px;
+  height: 40px;
+  margin-top: 5px;
+  margin-right: 10px;
 }
 
 .shared-video-name-site {
-    font-size: 40px;
-    font-weight: 600;
+  font-size: 40px;
+  font-weight: 600;
 }
 
 .shared-video-logo {
-    font-size: 50px;
+  font-size: 50px;
 }
 
 .shared-video-span-welcome {
-    margin-right: 10px;
-    margin-top: -5px;
+  margin-right: 10px;
+  margin-top: -5px;
+}
+
+@media (max-width: 768px) {
+  .shared-video-name-site {
+    font-size: 20px;
+    font-weight: 600;
+    // line-height: 20px;
+  }
+
+  .shared-video-header {
+    &.ant-layout-header {
+      width: 100%;
+      height: 60px;
+      padding-left: 0px;
+      padding-right: 0px;
+      background: #fff;
+      line-height: 20px;
+      // border-bottom: 2px solid black;
+    }
+  }
 }

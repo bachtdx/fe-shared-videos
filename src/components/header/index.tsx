@@ -18,7 +18,7 @@ function Header({ user }: HeaderProps) {
           {user.email ? (
             <Row className="shared-vide-row" justify="end">
               <span className="shared-video-span-welcome">
-                Welcome someone@example.com
+                Welcome {user.email}
               </span>
               <Button className="shared-video-button-share-movie">
                 Share a movie
