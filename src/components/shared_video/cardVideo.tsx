@@ -8,12 +8,14 @@ const { Title, Text } = Typography;
 
 interface Video {
   id: number;
-  title: string;
-  url: string;
-  shared_By: string;
-  likes: number;
-  dislikes: number;
-  description: string;
+  user_id: number;
+  video_id: string;
+  video_title: string;
+  video_embed: string;
+  shared_by: string;
+  video_like: number;
+  video_dislike: number;
+  video_description: string;
 }
 interface CardVideoProps {
   video: Video;
@@ -23,7 +25,7 @@ interface CardVideoProps {
   };
 }
 
-function CardVideo({ video }: CardVideoProps) {
+function CardVideo({ video, user }: CardVideoProps) {
   const handleLike = () => {
     // Xử lý sự kiện like
   };
@@ -47,7 +49,7 @@ function CardVideo({ video }: CardVideoProps) {
           </div>
         </Col>
         <Col span={12}>
-          <div>
+          {user.email ? <div>
           <LikeOutlined
               className="shared-video-up-like shared-card-btn-like"
               onClick={handleLike}
@@ -57,25 +59,26 @@ function CardVideo({ video }: CardVideoProps) {
               onClick={handleDislike}
             />
             <Title className="shared-video-card-title" level={5}>
-              {video.title}
+              {video.video_title}
             </Title>
             
-          </div>
+          </div> : <div></div> }
+          
           <div>
             <Text>Shared by:</Text>
-            <Text style={{paddingLeft: 5}}>{video.shared_By}</Text>
+            <Text style={{paddingLeft: 5}}>{video.shared_by}</Text>
           </div>
           <div >
             <Text>
-              <LikeOutlined /> {video.likes}
+              <LikeOutlined /> {video.video_like}
             </Text>
             <Text style={{paddingLeft: 10}}>
-              <DislikeOutlined /> {video.dislikes}
+              <DislikeOutlined /> {video.video_dislike}
             </Text>
           </div>
           <div>
             <Text>Description:</Text> <br />
-            <Text>{video.description}</Text>
+            <Text>{video.video_description}</Text>
           </div>
         </Col>
       </Row>
