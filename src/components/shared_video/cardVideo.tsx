@@ -56,20 +56,20 @@ function CardVideo({ video }: CardVideoProps) {
               className="shared-video-up-like shared-card-btn-dislike"
               onClick={handleDislike}
             />
-            <Title className="shared-video-card-title" level={4}>
+            <Title className="shared-video-card-title" level={5}>
               {video.title}
             </Title>
             
           </div>
           <div>
-            <Text strong>Shared by:</Text>
-            <Text>{video.shared_By}</Text>
+            <Text>Shared by:</Text>
+            <Text style={{paddingLeft: 5}}>{video.shared_By}</Text>
           </div>
           <div >
             <Text>
               <LikeOutlined /> {video.likes}
             </Text>
-            <Text>
+            <Text style={{paddingLeft: 10}}>
               <DislikeOutlined /> {video.dislikes}
             </Text>
           </div>
