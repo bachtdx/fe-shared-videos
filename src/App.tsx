@@ -5,6 +5,7 @@ import { Layout } from "antd";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/header";
 import Home from "./pages/home";
+import Share from "./pages/share";
 const { Content } = Layout;
 
 interface User {
@@ -23,7 +24,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home user={user} />} />
-            {/* <Route path="/share" element={<Share />} /> */}
+            <Route path="/share" element={<Share />} />
           </Routes>
         </BrowserRouter>
       </Content>
