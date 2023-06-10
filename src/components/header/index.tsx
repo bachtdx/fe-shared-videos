@@ -1,16 +1,21 @@
 import React, { useState } from "react";
+import axios from "../../utils/axiosUtils";
+import Cookies from "js-cookie";
 import { Layout, Row, Col, Button, Input, message } from "antd";
 import { HomeFilled } from "@ant-design/icons";
+import showMessage from "../../utils/messageUtils";
 import "./index.scss";
 
+interface User {
+  token: string;
+  email: string;
+}
 interface HeaderProps {
-  user: {
-    token: string;
-    email: string;
-  };
+  setUser: React.Dispatch<React.SetStateAction<User>>;
+  user: User;
 }
 
-function Header({ user }: HeaderProps) {
+function Header({ user, setUser }: HeaderProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
@@ -26,14 +31,44 @@ function Header({ user }: HeaderProps) {
     console.log(email);
     console.log(password);
     if (email === "" || password === "") {
-      messageApi.open({
-        type: 'warning',
-        content: 'Email and Password cannot be blank',
-      });
+      showMessage('warning', 'Email and Password cannot be blank')
+    } else {
+      const paramsUser = {
+        email: email,
+        password: password,
+      };
+      axios
+        .post("/api/v1/login", paramsUser)
+        .then((response) => {
+          console.log("Success:", response.data);
+          setUser({
+            token: response.data.token,
+            email: response.data.userEmail,
+          })
+          Cookies.set("token", response.data.token);
+          showMessage('success', 'Login / Register successfully');
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     }
   };
   const onLogout = () => {
     console.log("logout");
+    axios
+        .delete("/api/v1/logout", {})
+        .then((response) => {
+          console.log("Success:", response.data);
+          setUser({
+            token: "",
+            email: "",
+          })
+          Cookies.set("token", "");
+          showMessage('success', response.data.message);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
   };
   return (
     <Layout.Header className="shared-video-header">
@@ -48,7 +83,9 @@ function Header({ user }: HeaderProps) {
               <Button className="shared-video-button-share-movie">
                 Share a movie
               </Button>
-              <Button className="shared-video-button-logout" onClick={onLogout}>Logout</Button>
+              <Button className="shared-video-button-logout" onClick={onLogout}>
+                Logout
+              </Button>
             </Row>
           ) : (
             <Row className="shared-video-row" justify="end">
