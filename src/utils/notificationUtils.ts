@@ -8,6 +8,7 @@ const openNotification = (
   notificationApi[type]({
     message: title,
     description: desc,
+    duration: 5
   });
 };
 export default openNotification;

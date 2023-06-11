@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../../utils/axiosUtils";
 import Cookies from "js-cookie";
@@ -78,6 +78,25 @@ function Header({ user, setUser }: HeaderProps) {
   const handleHomeClick = () => {
     navigate("/");
   };
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    const fetchUserData = async () => {
+      const response = await axios
+        .post("/api/v1/validation_token", {})
+        .then((response) => {
+          setUser({
+            token: token || "",
+            email: response.data.userEmail,
+          });
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    };
+
+    fetchUserData();
+  }, []);
   return (
     <Layout.Header className="shared-video-header">
       {contextHolder}

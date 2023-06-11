@@ -57,7 +57,7 @@ function SharedVideo({ user, setUser }: HomeProps) {
             lg={{ offset: 6, span: 12 }}
             md={{ offset: 6, span: 12 }}
           >
-            <CardVideo user={user} video={video} />
+            <CardVideo user={user} setUser={setUser} video={video} />
           </Col>
         </Row>
       ))}
