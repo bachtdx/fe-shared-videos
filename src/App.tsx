@@ -16,40 +16,26 @@ interface User {
   token: string;
   email: string;
 }
-
 function App() {
+  const cableServerUrl = process.env.REACT_APP_CABLE_SERVER_URL || "http://localhost:3000/cable";
   const [api, contextHolder] = notification.useNotification();
   const [user, setUser] = useState<User>({
     token: "",
     email: "",
   });
-
   useEffect(() => {
-    const token = Cookies.get("token");
-    const response = axios
-      .post("/api/v1/validation_token", {})
-      .then((response) => {
-        setUser({
-          token: token || "",
-          email: response.data.userEmail,
-        });
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-
-    const cable = ActionCable.createConsumer("ws://localhost:3000/cable");
-    const channel = cable.subscriptions.create("NotificationChannel", {
-      received: function(data) {
-        openNotification("success", "Have new Video", data.video_title);
-        console.log("Received message:", data);
+    
+    const cable = ActionCable.createConsumer(cableServerUrl);
+    const channel = cable.subscriptions.create({channel: "NotificationChannel", user_id: user.email}, {
+      received: function (data) {
+        openNotification("success", `A new video shared by: ${data.shared_by}`, data.video_title);
       },
     });
 
     return () => {
       channel.unsubscribe();
     };
-  }, []);
+  }, [user.email]);
   return (
     <Layout>
       {contextHolder}

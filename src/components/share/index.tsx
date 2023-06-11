@@ -4,7 +4,7 @@ import "./index.scss";
 import isYouTubeLink from "../../utils/youtubeUtils";
 import showMessage from "../../utils/messageUtils";
 import axios from "../../utils/axiosUtils";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 interface User {
   token: string;
@@ -17,7 +17,7 @@ interface ShareProps {
 function Index({ user, setUser }: ShareProps) {
   const [url, setUrl] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleInputChangeUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
   };
