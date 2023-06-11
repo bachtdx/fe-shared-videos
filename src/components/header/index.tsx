@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "../../utils/axiosUtils";
 import Cookies from "js-cookie";
 import { Layout, Row, Col, Button, Input, message } from "antd";
@@ -19,6 +20,7 @@ function Header({ user, setUser }: HeaderProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate();
   const handleInputChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -31,7 +33,7 @@ function Header({ user, setUser }: HeaderProps) {
     console.log(email);
     console.log(password);
     if (email === "" || password === "") {
-      showMessage('warning', 'Email and Password cannot be blank')
+      showMessage("warning", "Email and Password cannot be blank");
     } else {
       const paramsUser = {
         email: email,
@@ -44,9 +46,9 @@ function Header({ user, setUser }: HeaderProps) {
           setUser({
             token: response.data.token,
             email: response.data.userEmail,
-          })
+          });
           Cookies.set("token", response.data.token);
-          showMessage('success', 'Login / Register successfully');
+          showMessage("success", "Login / Register successfully");
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -56,19 +58,25 @@ function Header({ user, setUser }: HeaderProps) {
   const onLogout = () => {
     console.log("logout");
     axios
-        .delete("/api/v1/logout", {})
-        .then((response) => {
-          console.log("Success:", response.data);
-          setUser({
-            token: "",
-            email: "",
-          })
-          Cookies.set("token", "");
-          showMessage('success', response.data.message);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
+      .delete("/api/v1/logout", {})
+      .then((response) => {
+        console.log("Success:", response.data);
+        setUser({
+          token: "",
+          email: "",
         });
+        Cookies.set("token", "");
+        showMessage("success", response.data.message);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+  const handleShareClick = () => {
+    navigate("/share");
+  };
+  const handleHomeClick = () => {
+    navigate("/");
   };
   return (
     <Layout.Header className="shared-video-header">
@@ -80,7 +88,10 @@ function Header({ user, setUser }: HeaderProps) {
               <span className="shared-video-span-welcome">
                 Welcome {user.email}
               </span>
-              <Button className="shared-video-button-share-movie">
+              <Button
+                className="shared-video-button-share-movie"
+                onClick={handleShareClick}
+              >
                 Share a movie
               </Button>
               <Button className="shared-video-button-logout" onClick={onLogout}>
@@ -113,8 +124,10 @@ function Header({ user, setUser }: HeaderProps) {
           )}
         </Col>
         <Col span={8} pull={16}>
-          <HomeFilled className="shared-video-logo" />{" "}
-          <span className="shared-video-name-site">Funny Movies</span>
+          <div onClick={handleHomeClick} style={{ cursor: "pointer" }}>
+            <HomeFilled className="shared-video-logo" />{" "}
+            <span className="shared-video-name-site">Funny Movies</span>
+          </div>
         </Col>
       </Row>
       <hr />

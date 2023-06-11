@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import { Card, Row, Col, Typography, Avatar } from "antd";
+import { Row, Col, message } from "antd";
 import "./index.scss";
 import CardVideo from "./cardVideo";
 import axios from "../../utils/axiosUtils";
+import showMessage from "../../utils/messageUtils";
 interface Video {
   id: number;
   user_id: number;
@@ -15,14 +16,17 @@ interface Video {
   video_dislike: number;
   video_description: string;
 }
-interface SharedVideoProps {
-  user: {
-    token: string;
-    email: string;
-  };
+interface User {
+  token: string;
+  email: string;
 }
-function SharedVideo({ user }: SharedVideoProps) {
+interface HomeProps {
+  setUser: React.Dispatch<React.SetStateAction<User>>;
+  user: User;
+}
+function SharedVideo({ user, setUser }: HomeProps) {
   const [videoData, setVideoData] = useState<Video[]>([]);
+  const [messageApi, contextHolder] = message.useMessage();
   useEffect(() => {
     axios
       .get("/api/v1/videos")
@@ -31,11 +35,20 @@ function SharedVideo({ user }: SharedVideoProps) {
         setVideoData(response.data.shared_videos);
       })
       .catch((error) => {
-        console.error("Error:", error);
+        if (error.message.includes("401")) {
+          showMessage("error", "Please log in again");
+          setUser({
+            token: "",
+            email: "",
+          });
+        } else {
+          console.error("Error:", error.message);
+        }
       });
   }, []);
   return (
     <div>
+      {contextHolder}
       {videoData.map((video) => (
         <Row>
           <Col

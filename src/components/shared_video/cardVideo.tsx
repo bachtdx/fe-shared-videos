@@ -41,7 +41,7 @@ function CardVideo({ video, user }: CardVideoProps) {
             <iframe
               title="Embedded Video"
               width="100%"
-              src={"https://www.youtube.com/embed/SlGnZDI9HVg"}
+              src={video.video_embed}
               frameBorder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
