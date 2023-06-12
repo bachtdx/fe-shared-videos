@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input, Button, Row, Col, message } from "antd";
-import "./index.scss";
+import "./index.css";
 import isYouTubeLink from "../../utils/youtubeUtils";
 import showMessage from "../../utils/messageUtils";
 import axios from "../../utils/axiosUtils";

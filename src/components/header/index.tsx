@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import { Layout, Row, Col, Button, Input, message } from "antd";
 import { HomeFilled } from "@ant-design/icons";
 import showMessage from "../../utils/messageUtils";
-import "./index.scss";
+import "./index.css";
 
 interface User {
   token: string;

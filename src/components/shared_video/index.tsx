@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Row, Col, message } from "antd";
-import "./index.scss";
+import "./index.css";
 import CardVideo from "./cardVideo";
 import axios from "../../utils/axiosUtils";
 import showMessage from "../../utils/messageUtils";

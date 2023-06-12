@@ -2,7 +2,7 @@ import React from "react";
 
 import { Card, Typography, Row, Col } from "antd";
 import { LikeOutlined, DislikeOutlined } from "@ant-design/icons";
-import "./index.scss";
+import "./index.css";
 import axios from "../../utils/axiosUtils";
 import showMessage from "../../utils/messageUtils";
 const { Meta } = Card;

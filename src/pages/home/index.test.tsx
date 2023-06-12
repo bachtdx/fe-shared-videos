@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import SharedVideo from '../../components/shared_video';
 import Home from './index';
-
+import Adapter from '@cfaester/enzyme-adapter-react-18';
+import Enzyme from 'enzyme';
+Enzyme.configure({ adapter: new Adapter() });
 describe('Home', () => {
   let setUser: any;
   let wrapper: any;

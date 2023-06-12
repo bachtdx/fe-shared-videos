@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Share from '../../components/share';
 import Index from './index';
-
+import Adapter from '@cfaester/enzyme-adapter-react-18';
+import Enzyme from 'enzyme';
+Enzyme.configure({ adapter: new Adapter() });
 describe('Index', () => {
   let setUser: any;
   let wrapper: any;
