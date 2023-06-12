@@ -54,7 +54,7 @@ describe('SharedVideo', () => {
       },
     };
 
-    // axios.get.mockResolvedValueOnce(mockResponse);
+    // axios.post.mockResolvedValueOnce(mockResponse);
 
     // wrapper.instance().componentDidMount();
 

@@ -38,17 +38,20 @@ describe('Index', () => {
   it('should update the URL state when input value changes', () => {
     const input = wrapper.find(Input);
     input.simulate('change', { target: { value: 'https://www.youtube.com/watch?v=123456' } });
-
-    // expect(wrapper.state('url')).toBe('https://www.youtube.com/watch?v=123456');
+    // console.log(input.debug({ verbose: true}));
+    // console.log(wrapper.find(Input).getElements()[0].props.value);
+    expect(wrapper.find(Input).getElements()[0].props.value).toBe('https://www.youtube.com/watch?v=123456');
   });
 
   it('should show an error message for invalid URL', () => {
     // const showMessage = jest.spyOn(wrapper.instance(), 'showMessage');
+    // sconsole.log(showMessage);
     const button = wrapper.find(Button);
-    // wrapper.setState({ url: 'invalid_url' });
+    const input = wrapper.find(Input);
+    input.simulate('change', { target: { value: 'invalid_url' } });
 
     button.simulate('click');
-
+    expect(wrapper.find(Input).getElements()[0].props.value).toBe('invalid_url');
     // expect(showMessage).toHaveBeenCalledWith('error', 'Invalid URL');
   });
 

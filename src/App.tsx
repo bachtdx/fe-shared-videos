@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Layout, notification } from "antd";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/header";
 import Home from "./pages/home";
 import Share from "./pages/share";
-import Cookies from "js-cookie";
-import axios from "./utils/axiosUtils";
 import ActionCable from "actioncable";
 import openNotification from "./utils/notificationUtils";
 const { Content } = Layout;

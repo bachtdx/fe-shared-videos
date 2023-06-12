@@ -30,8 +30,6 @@ function Header({ user, setUser }: HeaderProps) {
     setPassword(e.target.value);
   };
   const onLoginAndRegister = () => {
-    console.log(email);
-    console.log(password);
     if (email === "" || password === "") {
       showMessage("warning", "Email and Password cannot be blank");
     } else {
@@ -56,11 +54,9 @@ function Header({ user, setUser }: HeaderProps) {
     }
   };
   const onLogout = () => {
-    console.log("logout");
     axios
       .delete("/api/v1/logout", {})
       .then((response) => {
-        console.log("Success:", response.data);
         setUser({
           token: "",
           email: "",
